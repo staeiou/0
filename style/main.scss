@@ -41,11 +41,13 @@ body {
 }
 
 h1.title {
-  font-size: 80px;
+  font-size: 40px;
   font-weight: bold;
+  line-height: 0.9;
   margin: 0;
   display: block;
   float: left;
+  max-width: 3em;
 }
 
 @include keyframes(move-up) {
@@ -326,22 +328,22 @@ hr {
   -moz-transition-property: -moz-transform;
   transition-property: transform;
 
-  $base: 2;
+  $base: 3;
   $exponent: 1;
   $limit: 11;
 
   // Colors for all 11 states, false = no special color
-  $special-colors: false false, // 2
-                   false false, // 4
-                   #f78e48 true, // 8
-                   #fc5e2e true, // 16
-                   #ff3333 true, // 32
-                   #ff0000 true, // 64
-                   false true, // 128
-                   false true, // 256
-                   false true, // 512
-                   false true, // 1024
-                   false true; // 2048
+  $special-colors: false false, // 3
+                   false false, // 9
+                   #f78e48 true, // 27
+                   #fc5e2e true, // 81
+                   #ff3333 true, // 243
+                   #ff0000 true, // 729
+                   false true, // 2187
+                   false true, // 6561
+                   false true, // 19683
+                   false true, // 59049
+                   false true; // 177147
 
   // Build tile colors
   @while $exponent <= $limit {
@@ -377,18 +379,33 @@ hr {
       }
 
       // Adjust font size for bigger numbers
-      @if $power >= 100 and $power < 1000 {
+      @if $power >= 100000 {
+        font-size: 25px;
+
+        @include smaller($mobile-threshold) {
+          font-size: 12px;
+        }
+      }
+      @else if $power >= 10000 {
+        font-size: 30px;
+
+        @include smaller($mobile-threshold) {
+          font-size: 15px;
+        }
+      }
+      @else if $power >= 1000 {
+        font-size: 35px;
+
+        @include smaller($mobile-threshold) {
+          font-size: 15px;
+        }
+      }
+      @else if $power >= 100 {
         font-size: 45px;
 
         // Media queries placed here to avoid carrying over the rest of the logic
         @include smaller($mobile-threshold) {
           font-size: 25px;
-        }
-      } @else if $power >= 1000 {
-        font-size: 35px;
-
-        @include smaller($mobile-threshold) {
-          font-size: 15px;
         }
       }
     }
@@ -396,12 +413,12 @@ hr {
     $exponent: $exponent + 1;
   }
 
-  // Super tiles (above 2048)
+  // Super tiles (above 177147)
   &.tile-super .tile-inner {
     color: $bright-text-color;
     background: mix(#333, $tile-gold-color, 95%);
 
-    font-size: 30px;
+    font-size: 25px;
 
     @include smaller($mobile-threshold) {
       font-size: 10px;
@@ -447,7 +464,7 @@ hr {
 }
 
 .game-intro {
-  margin-bottom: 0;
+  margin: 1em 5px 0;
 }
 
 .game-explanation {
@@ -473,7 +490,7 @@ hr {
 
   h1.title {
     font-size: 27px;
-    margin-top: 15px;
+    margin-top: 5px;
   }
 
   .container {
