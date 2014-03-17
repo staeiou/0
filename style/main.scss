@@ -41,13 +41,12 @@ body {
 }
 
 h1.title {
-  font-size: 40px;
+  font-size: 60px;
   font-weight: bold;
   line-height: 0.9;
-  margin: 0;
+  margin: 15px 0 0;
   display: block;
   float: left;
-  max-width: 3em;
 }
 
 @include keyframes(move-up) {
@@ -491,6 +490,7 @@ hr {
   h1.title {
     font-size: 27px;
     margin-top: 5px;
+    max-width: 3em;
   }
 
   .container {
